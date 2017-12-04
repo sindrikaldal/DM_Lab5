@@ -82,19 +82,11 @@ public class Jabeja {
 
     // swap the colors
     if (partner != null) {
-
-      Double currentDegree = Math.pow(getDegree(nodep, nodep.getColor()), config.getAlpha()) +
-                            Math.pow(getDegree(partner, partner.getColor()), config.getAlpha());
-      Double proposedDegree = Math.pow(getDegree(nodep, partner.getColor()), config.getAlpha()) +
-              Math.pow(getDegree(partner, nodep.getColor()), config.getAlpha());
-
-      if (proposedDegree > currentDegree) {
         int nodeColor = nodep.getColor();
         int partnerColor = partner.getColor();
         nodep.setColor(partnerColor);
         partner.setColor(nodeColor);
         numberOfSwaps++;
-      }
     }
     saCoolDown();
   }
@@ -107,8 +99,10 @@ public class Jabeja {
 
     for(int partnerId : nodes) {
       Node potentialPartner = entireGraph.get(partnerId);
-      int oldDegree = getDegree(potentialPartner, potentialPartner.getColor()) + getDegree(nodep, nodep.getColor());
-      int newDegree = getDegree(nodep, potentialPartner.getColor()) + getDegree(potentialPartner, nodep.getColor());
+      double oldDegree = Math.pow(getDegree(potentialPartner, potentialPartner.getColor()), config.getAlpha())
+                      + Math.pow(getDegree(nodep, nodep.getColor()), config.getAlpha());
+      double newDegree = Math.pow(getDegree(nodep, potentialPartner.getColor()), config.getAlpha())
+                        + Math.pow(getDegree(potentialPartner, nodep.getColor()), config.getAlpha());
 
       if(this.T * newDegree > oldDegree && newDegree > highestBenefit) {
         highestBenefit = newDegree;
