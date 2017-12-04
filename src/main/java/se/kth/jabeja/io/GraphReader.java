@@ -1,9 +1,9 @@
-package main.java.se.kth.jabeja.io;
+package se.kth.jabeja.io;
 
 import org.apache.log4j.Logger;
-import main.java.se.kth.jabeja.Node;
-import main.java.se.kth.jabeja.rand.RandNoGenerator;
-import main.java.se.kth.jabeja.config.GraphInitColorPolicy;
+import se.kth.jabeja.Node;
+import se.kth.jabeja.rand.RandNoGenerator;
+import se.kth.jabeja.config.GraphInitColorPolicy;
 
 import java.io.*;
 import java.util.ArrayList;

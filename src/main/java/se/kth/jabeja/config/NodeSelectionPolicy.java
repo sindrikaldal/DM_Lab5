@@ -1,4 +1,4 @@
-package main.java.se.kth.jabeja.config;
+package se.kth.jabeja.config;
 
 /**
  * Created by salman on 10/25/16.

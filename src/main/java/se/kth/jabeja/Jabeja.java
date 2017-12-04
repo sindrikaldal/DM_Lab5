@@ -1,9 +1,9 @@
-package main.java.se.kth.jabeja;
+package se.kth.jabeja;
 
-import main.java.se.kth.jabeja.config.Config;
-import main.java.se.kth.jabeja.config.NodeSelectionPolicy;
-import main.java.se.kth.jabeja.io.FileIO;
-import main.java.se.kth.jabeja.rand.RandNoGenerator;
+import se.kth.jabeja.config.Config;
+import se.kth.jabeja.config.NodeSelectionPolicy;
+import se.kth.jabeja.io.FileIO;
+import se.kth.jabeja.rand.RandNoGenerator;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -15,7 +15,7 @@ import java.util.List;
 public class Jabeja {
   final static Logger logger = Logger.getLogger(Jabeja.class);
   private final Config config;
-  private final HashMap<Integer/*id*/, main.java.se.kth.jabeja.Node/*neighbors*/> entireGraph;
+  private final HashMap<Integer/*id*/, se.kth.jabeja.Node/*neighbors*/> entireGraph;
   private final List<Integer> nodeIds;
   private int numberOfSwaps;
   private int round;
@@ -23,7 +23,7 @@ public class Jabeja {
   private boolean resultFileCreated = false;
 
   //-------------------------------------------------------------------
-  public Jabeja(HashMap<Integer, main.java.se.kth.jabeja.Node> graph, Config config) {
+  public Jabeja(HashMap<Integer, se.kth.jabeja.Node> graph, Config config) {
     this.entireGraph = graph;
     this.nodeIds = new ArrayList(entireGraph.keySet());
     this.round = 0;
