@@ -67,13 +67,15 @@ public class Jabeja {
     if (config.getNodeSelectionPolicy() == NodeSelectionPolicy.HYBRID
             || config.getNodeSelectionPolicy() == NodeSelectionPolicy.LOCAL) {
       // swap with random neighbors
-      // TODO
+      partner = findPartner(nodeId, nodep.getNeighbours().toArray(new Integer[nodep.getNeighbours().size()]));
     }
 
     if (config.getNodeSelectionPolicy() == NodeSelectionPolicy.HYBRID
             || config.getNodeSelectionPolicy() == NodeSelectionPolicy.RANDOM) {
       // if local policy fails then randomly sample the entire graph
-      // TODO
+      if (partner == null) {
+        partner = findPartner(nodeId, getSample(nodeId));
+      }
     }
 
     // swap the colors
