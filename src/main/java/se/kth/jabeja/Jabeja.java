@@ -56,10 +56,14 @@ public class Jabeja {
    */
   private void saCoolDown(){
     // TODO for second task
+    float alpha = 0.9f;
+    this.T = this.T * alpha;
+    /*
     if (T > 1)
       T -= config.getDelta();
     if (T < 1)
       T = 1;
+     */
   }
 
   /**
