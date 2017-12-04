@@ -93,8 +93,8 @@ public class Jabeja {
         int partnerColor = partner.getColor();
         nodep.setColor(partnerColor);
         partner.setColor(nodeColor);
+        numberOfSwaps++;
       }
-
     }
     saCoolDown();
   }
