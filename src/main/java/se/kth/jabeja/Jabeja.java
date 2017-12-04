@@ -47,6 +47,10 @@ public class Jabeja {
     }
   }
 
+  private double acceptance_probability(int oldCost, int newCost, int temperature) {
+    return Math.exp((oldCost - newCost) / temperature);
+  }
+
   /**
    * Simulated analealing cooling function
    */
