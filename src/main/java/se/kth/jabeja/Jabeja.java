@@ -28,7 +28,7 @@ public class Jabeja {
     this.numberOfSwaps = 0;
     this.config = config;
     this.T = config.getTemperature();
-  }
+  } 
 
 
   //-------------------------------------------------------------------
