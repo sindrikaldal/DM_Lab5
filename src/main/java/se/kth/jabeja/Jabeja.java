@@ -1,10 +1,10 @@
-package se.kth.jabeja;
+package main.java.se.kth.jabeja;
 
 import org.apache.log4j.Logger;
-import se.kth.jabeja.config.Config;
-import se.kth.jabeja.config.NodeSelectionPolicy;
-import se.kth.jabeja.io.FileIO;
-import se.kth.jabeja.rand.RandNoGenerator;
+import main.java.se.kth.jabeja.config.Config;
+import main.java.se.kth.jabeja.config.NodeSelectionPolicy;
+import main.java.se.kth.jabeja.io.FileIO;
+import main.java.se.kth.jabeja.rand.RandNoGenerator;
 
 import java.io.File;
 import java.io.IOException;

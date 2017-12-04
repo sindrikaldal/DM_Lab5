@@ -1,4 +1,4 @@
-package se.kth.jabeja.rand;
+package main.java.se.kth.jabeja.rand;
 
 import java.util.Random;
 

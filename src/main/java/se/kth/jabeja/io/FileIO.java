@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package se.kth.jabeja.io;
+package main.java.se.kth.jabeja.io;
 
 import java.io.*;
 

@@ -1,4 +1,4 @@
-package se.kth.jabeja.config;
+package main.java.se.kth.jabeja.config;
 
 public class Config {
   private Integer numPartitions;

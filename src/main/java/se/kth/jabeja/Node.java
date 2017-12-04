@@ -1,4 +1,4 @@
-package se.kth.jabeja;
+package main.java.se.kth.jabeja;
 
 import java.util.ArrayList;
 

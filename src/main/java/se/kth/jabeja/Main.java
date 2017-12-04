@@ -1,12 +1,11 @@
-package se.kth.jabeja;
+package main.java.se.kth.jabeja;
 
 import org.apache.log4j.Logger;
-import se.kth.jabeja.io.CLI;
-import se.kth.jabeja.io.GraphReader;
-import se.kth.jabeja.config.Config;
-import se.kth.jabeja.rand.RandNoGenerator;
+import main.java.se.kth.jabeja.io.CLI;
+import main.java.se.kth.jabeja.io.GraphReader;
+import main.java.se.kth.jabeja.config.Config;
+import main.java.se.kth.jabeja.rand.RandNoGenerator;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 

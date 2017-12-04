@@ -1,11 +1,11 @@
-package se.kth.jabeja.io;
+package main.java.se.kth.jabeja.io;
 
 import org.apache.log4j.Logger;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
-import se.kth.jabeja.config.Config;
-import se.kth.jabeja.config.GraphInitColorPolicy;
-import se.kth.jabeja.config.NodeSelectionPolicy;
+import main.java.se.kth.jabeja.config.Config;
+import main.java.se.kth.jabeja.config.GraphInitColorPolicy;
+import main.java.se.kth.jabeja.config.NodeSelectionPolicy;
 
 import java.io.File;
 import java.io.FileNotFoundException;
