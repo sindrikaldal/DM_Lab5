@@ -1,19 +1,21 @@
 package main.java.se.kth.jabeja;
 
-import org.apache.log4j.Logger;
 import main.java.se.kth.jabeja.config.Config;
 import main.java.se.kth.jabeja.config.NodeSelectionPolicy;
 import main.java.se.kth.jabeja.io.FileIO;
 import main.java.se.kth.jabeja.rand.RandNoGenerator;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Jabeja {
   final static Logger logger = Logger.getLogger(Jabeja.class);
   private final Config config;
-  private final HashMap<Integer/*id*/, Node/*neighbors*/> entireGraph;
+  private final HashMap<Integer/*id*/, main.java.se.kth.jabeja.Node/*neighbors*/> entireGraph;
   private final List<Integer> nodeIds;
   private int numberOfSwaps;
   private int round;
@@ -21,7 +23,7 @@ public class Jabeja {
   private boolean resultFileCreated = false;
 
   //-------------------------------------------------------------------
-  public Jabeja(HashMap<Integer, Node> graph, Config config) {
+  public Jabeja(HashMap<Integer, main.java.se.kth.jabeja.Node> graph, Config config) {
     this.entireGraph = graph;
     this.nodeIds = new ArrayList(entireGraph.keySet());
     this.round = 0;
@@ -98,13 +100,21 @@ public class Jabeja {
   }
 
   public Node findPartner(int nodeId, Integer[] nodes){
-
     Node nodep = entireGraph.get(nodeId);
 
     Node bestPartner = null;
     double highestBenefit = 0;
 
-    // TODO
+    for(int partnerId : nodes) {
+      Node potentialPartner = entireGraph.get(partnerId);
+      int oldDegree = getDegree(potentialPartner, potentialPartner.getColor()) + getDegree(nodep, nodep.getColor());
+      int newDegree = getDegree(nodep, potentialPartner.getColor()) + getDegree(potentialPartner, nodep.getColor());
+
+      if(this.T * newDegree > oldDegree && newDegree > highestBenefit) {
+        highestBenefit = newDegree;
+        bestPartner = potentialPartner;
+      }
+    }
 
     return bestPartner;
   }
