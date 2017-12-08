@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Node {
 
+	private double temp;
+	private double benefit;
 	private int id;
 	private int color;
 	private int initColor;
@@ -11,6 +13,7 @@ public class Node {
 
 	public Node(int id, int color) {
 		this.id = id;
+		this.temp = 1;
 		this.color = color;
 		this.initColor = color;
 		this.neighbours = new ArrayList<Integer>();
@@ -24,7 +27,18 @@ public class Node {
 		for (int id : neighbours)
 			this.neighbours.add(id);
 	}
-	
+
+
+	public double getBenefit() {
+		return benefit;
+	}
+
+	public void setBenefit(double benefit) {
+		this.benefit = benefit;
+	}
+
+	public double getTemp() { return temp; }
+	public void setTemp(double temp) { this.temp = temp; }
 	public int getId() {
 		return this.id;
 	}
