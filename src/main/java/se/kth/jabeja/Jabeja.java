@@ -48,12 +48,7 @@ public class Jabeja {
   }
 
   private double acceptance_probability(double oldCost, double newCost, Node node) {
-    return oldCost == newCost ? 0 : Math.exp((newCost - oldCost) / node.getTemp());
-  }
-
-  private double cost(Node node, Node partner) {
-    return Math.pow(getDegree(node, partner.getColor()), config.getAlpha())
-            + Math.pow(getDegree(partner, node.getColor()), config.getAlpha());
+    return oldCost == newCost ? 0 : Math.exp((newCost - oldCost) / this.T);
   }
 
   /**
@@ -61,17 +56,7 @@ public class Jabeja {
    */
   private void saCoolDown(Node node){
     // TODO for second task
-   /*if (T > 1)
-      T -= config.getDelta();
-    if (T < 1)
-      T = 1;*/
-    Double temp = node.getTemp();
-    temp *= 0.9;
-    if (temp < 0.01) {
-      node.setTemp(0.01);
-    } else {
-      node.setTemp(temp);
-    }
+    this.T *= 0.9;
   }
 
   /**
@@ -81,38 +66,32 @@ public class Jabeja {
   private void sampleAndSwap(int nodeId) {
     Node partner = null;
     Node nodep = entireGraph.get(nodeId);
-    Node temp_partner = null;
-
-    if (config.getNodeSelectionPolicy() == NodeSelectionPolicy.HYBRID
-            || config.getNodeSelectionPolicy() == NodeSelectionPolicy.LOCAL) {
-      temp_partner = findPartner(nodeId, getNeighbors(nodep));
-    }
 
   /*if (config.getNodeSelectionPolicy() == NodeSelectionPolicy.HYBRID
           || config.getNodeSelectionPolicy() == NodeSelectionPolicy.RANDOM) {*/
     // if local policy fails then randomly sample the entire graph
 
-
-
-    for (int i = 0; i < 100; i++) {
-      Node random_partner = findPartner(nodeId, getSample(nodeId));
-
-      if (temp_partner == null && random_partner != null) {
-        partner = random_partner;
-        temp_partner = random_partner;
-      }
-      else if (random_partner != null){
-        partner = temp_partner;
-        if (random_partner.getBenefit() > partner.getBenefit()) {
-          partner = random_partner;
-        }
-      }
+    if (config.getNodeSelectionPolicy() == NodeSelectionPolicy.HYBRID
+            || config.getNodeSelectionPolicy() == NodeSelectionPolicy.LOCAL) {
+      partner = findPartner(nodeId, getNeighbors(nodep));
     }
 
-    // }
+    while (this.T > 0.0001) {
 
-    saCoolDown(nodep);
+      Node new_partner = findPartner(nodeId, getSample(nodeId));;
 
+      if (partner != null && new_partner != null) {
+        if (new_partner.getCost() > partner.getCost()) {
+          partner = new_partner;
+        }
+      } else if (partner == null && new_partner != null){
+        partner = new_partner;
+      }
+
+      saCoolDown(nodep);
+    }
+
+    this.T = config.getTemperature();
 
     // swap the colors
     if (partner != null && partner.getColor() != nodep.getColor()) {
@@ -124,7 +103,7 @@ public class Jabeja {
     }
   }
 
-  public Node findPartner(int nodeId, Integer[] nodes){
+  private Node findPartner(int nodeId, Integer[] nodes){
     Node nodep = entireGraph.get(nodeId);
 
     Node bestPartner = null;
@@ -140,16 +119,10 @@ public class Jabeja {
 
       double acceptance_probability = acceptance_probability(oldDegree, newDegree, nodep);
 
-      if (1 > acceptance_probability && acceptance_probability > 0) {
-        System.out.println(acceptance_probability);
-      } else {
-        System.out.println("SINNDREEEEEHH");
-      }
-
       if(acceptance_probability > Math.random() && newDegree > highestBenefit) {
         highestBenefit = newDegree;
         bestPartner = potentialPartner;
-        bestPartner.setBenefit(highestBenefit);
+        bestPartner.setCost(highestBenefit);
       }
     }
 
