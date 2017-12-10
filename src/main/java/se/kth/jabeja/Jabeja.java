@@ -50,7 +50,11 @@ public class Jabeja {
   }
 
   private double acceptance_probability(double oldCost, double newCost, Node node) {
-    return oldCost == newCost ? 0 : Math.exp((newCost - oldCost) / this.T);
+    if (oldCost == newCost) return 0;
+    double exp = Math.exp((newCost - oldCost));
+
+    return exp / (exp + 1);
+    //return oldCost == newCost ? 0 : Math.exp((newCost - oldCost) / this.T);
   }
 
   /**
