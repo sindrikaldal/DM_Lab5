@@ -20,6 +20,7 @@ public class Jabeja {
   private final List<Integer> nodeIds;
   private int numberOfSwaps;
   private int round;
+  private Random random;
   private float T;
   private boolean resultFileCreated = false;
 
@@ -30,6 +31,7 @@ public class Jabeja {
     this.round = 0;
     this.numberOfSwaps = 0;
     this.config = config;
+    this.random = new Random();
     this.T = config.getTemperature();
   } 
 
@@ -54,7 +56,7 @@ public class Jabeja {
   /**
    * Simulated analealing cooling function
    */
-  private void saCoolDown(Node node){
+  private void saCoolDown(){
     // TODO for second task
     this.T *= 0.9;
   }
@@ -76,22 +78,19 @@ public class Jabeja {
       partner = findPartner(nodeId, getNeighbors(nodep));
     }
 
-    while (this.T > 0.0001) {
 
-      Node new_partner = findPartner(nodeId, getSample(nodeId));;
+    Node new_partner = findPartner(nodeId, getSample(nodeId));;
 
-      if (partner != null && new_partner != null) {
-        if (new_partner.getCost() > partner.getCost()) {
-          partner = new_partner;
-        }
-      } else if (partner == null && new_partner != null){
+    if (partner != null && new_partner != null) {
+      if (new_partner.getCost() > partner.getCost()) {
         partner = new_partner;
       }
-
-      saCoolDown(nodep);
+    } else if (partner == null && new_partner != null){
+      partner = new_partner;
     }
 
-    this.T = config.getTemperature();
+    saCoolDown();
+
 
     // swap the colors
     if (partner != null && partner.getColor() != nodep.getColor()) {
@@ -118,8 +117,8 @@ public class Jabeja {
                         + Math.pow(getDegree(potentialPartner, nodep.getColor()), config.getAlpha());
 
       double acceptance_probability = acceptance_probability(oldDegree, newDegree, nodep);
-      
-      if(acceptance_probability > Math.random() && newDegree > highestBenefit) {
+
+      if(acceptance_probability > random.nextDouble() && newDegree > highestBenefit) {
         highestBenefit = newDegree;
         bestPartner = potentialPartner;
         bestPartner.setCost(highestBenefit);
