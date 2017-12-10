@@ -118,7 +118,7 @@ public class Jabeja {
                         + Math.pow(getDegree(potentialPartner, nodep.getColor()), config.getAlpha());
 
       double acceptance_probability = acceptance_probability(oldDegree, newDegree, nodep);
-
+      
       if(acceptance_probability > Math.random() && newDegree > highestBenefit) {
         highestBenefit = newDegree;
         bestPartner = potentialPartner;
